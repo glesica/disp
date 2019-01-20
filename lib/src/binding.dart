@@ -1,4 +1,4 @@
-import 'package:dumblisp/src/ast.dart';
+import 'package:dumblisp/src/ast/node.dart';
 
 abstract class Binding extends Node {
   String get name;
@@ -32,11 +32,11 @@ class ProgramFunction implements FunctionBinding {
   Node apply(List<Node> arguments) => throw UnimplementedError();
 }
 
-class VariableBinding extends Binding {
+class VariableBinding<T extends Node> extends Binding {
   @override
   final String name;
 
-  final Node value;
+  final T value;
 
   VariableBinding({this.name, this.value});
 }

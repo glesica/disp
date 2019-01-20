@@ -1,4 +1,8 @@
-import 'package:dumblisp/src/ast.dart';
+import 'package:dumblisp/src/ast/int.dart';
+import 'package:dumblisp/src/ast/node.dart';
+import 'package:dumblisp/src/ast/num.dart';
+import 'package:dumblisp/src/ast/str.dart';
+import 'package:dumblisp/src/ast/void.dart';
 import 'package:dumblisp/src/binding.dart';
 import 'package:dumblisp/src/context.dart';
 
@@ -16,9 +20,7 @@ final standardContext = _standardBuilder.build();
 Void echo(List<Node> args) {
   var output = '';
   for (final arg in args) {
-    if (arg is Int) {
-      output += arg.value.toString();
-    } else if (arg is Float) {
+    if (arg is Num) {
       output += arg.value.toString();
     } else if (arg is Str) {
       output += arg.value;

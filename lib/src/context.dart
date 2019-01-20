@@ -1,17 +1,19 @@
+import 'package:dumblisp/src/ast/node.dart';
 import 'package:dumblisp/src/binding.dart';
-
-// TODO: Accept AST nodes instead of Dart values
-// TODO: Add helpers to do type assertions on values
 
 abstract class Context {
   static ContextBuilder builder() => ContextBuilderImpl();
+
+  /// All of the names that are bound to symbols in this context.
+  Iterable<String> get boundNames;
 
   /// Returns the binding with the given name, or `null` if no
   /// such binding exists in this [Context].
   Binding binding(String name);
 
-  /// All of the names that are bound to symbols in this context.
-  Iterable<String> get boundNames;
+  FunctionBinding functionBinding(String name);
+
+  VariableBinding<T> variableBinding<T extends Node>(String name);
 }
 
 class ContextImpl implements Context {
@@ -20,10 +22,28 @@ class ContextImpl implements Context {
   final Map<String, Binding> _bindings;
 
   @override
+  Iterable<String> get boundNames => _bindings.keys;
+
+  @override
   Binding binding(String name) => _bindings[name];
 
   @override
-  Iterable<String> get boundNames => _bindings.keys;
+  FunctionBinding functionBinding(String name) {
+    final binding = _bindings[name];
+    if (binding is! FunctionBinding) {
+      return null;
+    }
+    return binding;
+  }
+
+  @override
+  VariableBinding<T> variableBinding<T extends Node>(String name) {
+    final binding = _bindings[name];
+    if (binding is! VariableBinding<T>) {
+      return null;
+    }
+    return binding;
+  }
 }
 
 abstract class ContextBuilder {

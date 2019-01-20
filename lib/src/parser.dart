@@ -1,4 +1,10 @@
-import 'package:dumblisp/src/ast.dart';
+import 'package:dumblisp/src/ast/float.dart';
+import 'package:dumblisp/src/ast/ident.dart';
+import 'package:dumblisp/src/ast/int.dart';
+import 'package:dumblisp/src/ast/lst.dart';
+import 'package:dumblisp/src/ast/node.dart';
+import 'package:dumblisp/src/ast/s_exp.dart';
+import 'package:dumblisp/src/ast/str.dart';
 import 'package:petitparser/petitparser.dart';
 
 final _parser = _buildParser();
