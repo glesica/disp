@@ -1,10 +1,12 @@
 import 'package:dumblisp/src/ast/float.dart';
+import 'package:dumblisp/src/ast/func.dart';
 import 'package:dumblisp/src/ast/ident.dart';
 import 'package:dumblisp/src/ast/int.dart';
 import 'package:dumblisp/src/ast/lst.dart';
 import 'package:dumblisp/src/ast/node.dart';
 import 'package:dumblisp/src/ast/s_exp.dart';
 import 'package:dumblisp/src/ast/str.dart';
+import 'package:dumblisp/src/ast/var.dart';
 import 'package:petitparser/petitparser.dart';
 
 final _parser = _buildParser();
@@ -37,12 +39,9 @@ Parser<Node> _buildParser() {
   final sExp = undefined<SExp>();
   final list = (sExp | identifier | float | integer | string)
       .plus()
-      .castList<Node>()
-      .map<Lst>(Lst.from);
+      .castList<Node>();
   final sExpInner = (lParen & list & rParen)
       .pick(1)
-      .cast<Lst>()
-      .map((l) => l.children.toList())
       .castList<Node>()
       .map<SExp>(SExp.from);
   sExp.set(sExpInner);
