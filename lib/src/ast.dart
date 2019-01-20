@@ -1,13 +1,16 @@
-class Node {}
+abstract class Node {}
+
+class Void extends Node {
+  @override
+  String toString() => 'Void';
+}
 
 class Lst extends Node {
-  final Iterable<Node> children;
-
   Lst(this.children);
 
   static Lst from(List<Node> values) => Lst(values);
 
-  static bool isOf(Node node) => node is Lst;
+  final Iterable<Node> children;
 
   String toString() => 'Lst $children';
 }
@@ -26,41 +29,41 @@ class SExp extends Lst {
 }
 
 class Ident extends Node {
-  final String name;
-
   Ident(this.name);
 
   static Ident from(String value) => Ident(value.trim());
+
+  final String name;
 
   String toString() => 'Ident $name';
 }
 
 class Float extends Node {
-  final double value;
-
   Float(this.value);
 
   static Float from(String value) => Float(double.parse(value));
+
+  final double value;
 
   String toString() => 'Float $value';
 }
 
 class Int extends Node {
-  final int value;
-
   Int(this.value);
 
   static Int from(String value) => Int(int.parse(value));
+
+  final int value;
 
   String toString() => 'Int $value';
 }
 
 class Str extends Node {
-  final String value;
-
   Str(this.value);
 
   static Str from(String value) => Str(value);
+
+  final String value;
 
   String toString() => 'Str $value';
 }
