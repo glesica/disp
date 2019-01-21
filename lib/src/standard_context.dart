@@ -1,3 +1,4 @@
+import 'package:dumblisp/src/ast/float.dart';
 import 'package:dumblisp/src/ast/int.dart';
 import 'package:dumblisp/src/ast/node.dart';
 import 'package:dumblisp/src/ast/num.dart';
@@ -32,31 +33,39 @@ Void echo(List<Node> args) {
   return Void();
 }
 
-Int sum(List<Node> expressions) {
-  final left = expressions[0] as Int;
-  final right = expressions[1] as Int;
-
-  return Int(left.value + right.value);
+Num sum(List<Node> expressions) {
+  final left = expressions[0] as Num;
+  final right = expressions[1] as Num;
+  return _chooseNum(left.value + right.value);
 }
 
-Int diff(List<Node> expressions) {
+Num diff(List<Node> expressions) {
   final left = expressions[0] as Int;
   final right = expressions[1] as Int;
-
-  return Int(left.value - right.value);
+  return _chooseNum(left.value - right.value);
 }
 
-Int prod(List<Node> expressions) {
+Num prod(List<Node> expressions) {
   final left = expressions[0] as Int;
   final right = expressions[1] as Int;
 
-  return Int(left.value * right.value);
+  return _chooseNum(left.value * right.value);
 }
 
-Int quot(List<Node> expressions) {
+Float quot(List<Node> expressions) {
   final left = expressions[0] as Int;
   final right = expressions[1] as Int;
-  final quotient = left.value / right.value;
+  return Float(left.value / right.value);
+}
 
-  return Int(quotient.truncate());
+Num _chooseNum(num value) {
+  if (value is int) {
+    return Int(value);
+  }
+
+  if (value is double) {
+    return Float(value);
+  }
+
+  throw Exception('No mapping for numeric type: "${value.runtimeType}"');
 }

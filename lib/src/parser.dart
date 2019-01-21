@@ -1,12 +1,10 @@
 import 'package:dumblisp/src/ast/float.dart';
-import 'package:dumblisp/src/ast/func.dart';
 import 'package:dumblisp/src/ast/ident.dart';
 import 'package:dumblisp/src/ast/int.dart';
 import 'package:dumblisp/src/ast/lst.dart';
 import 'package:dumblisp/src/ast/node.dart';
 import 'package:dumblisp/src/ast/s_exp.dart';
 import 'package:dumblisp/src/ast/str.dart';
-import 'package:dumblisp/src/ast/var.dart';
 import 'package:petitparser/petitparser.dart';
 
 final _parser = _buildParser();
@@ -25,25 +23,26 @@ Parser<Node> _buildParser() {
   final rParen = char(')').trim();
 
   final digits = digit().plus().trim().flatten();
-  final strChar = char('"').neg();
+
+  final idChars = lowercase() | char('-');
+  final strChars = char('"').neg();
 
   // Syntactic elements
 
-  // TODO: Keep this from gobbling the trailing whitespace
-  final identifier = letter().plus().trim().flatten().map<Ident>(Ident.from);
+  final identifier = idChars.plus().flatten().map<Ident>(Ident.from);
   final float = (digits & char('.') & digits).flatten().map<Float>(Float.from);
-  final integer = digits.map<Int>(Int.from);
-  final string =
-      (lQuote & strChar.star().flatten().map(Str.from) & rQuote).pick<Str>(1);
+  final integer = digits.flatten().map<Int>(Int.from);
+  final string = (lQuote & strChars.star().flatten() & rQuote)
+      .pick<String>(1)
+      .map(Str.from);
 
   final sExp = undefined<SExp>();
-  final list = (sExp | identifier | float | integer | string)
+  final list = (identifier | integer | float | string | sExp)
       .plus()
-      .castList<Node>();
-  final sExpInner = (lParen & list & rParen)
-      .pick(1)
       .castList<Node>()
-      .map<SExp>(SExp.from);
+      .map<Lst>(Lst.from);
+  final sExpInner =
+      (lParen & list & rParen).pick(1).cast<Lst>().map<SExp>(SExp.from);
   sExp.set(sExpInner);
 
   return sExp.end();

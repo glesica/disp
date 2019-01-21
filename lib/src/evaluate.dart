@@ -11,14 +11,19 @@ Node evaluate(Context ctx, dynamic tree) {
   }
 
   if (tree is Ident) {
-    return ctx.binding(tree.name);
+    final binding = ctx.binding(tree.name);
+    if (binding == null) {
+      throw Exception('Not found: "$tree"');
+    }
+    return binding;
   }
 
   // TODO: Implement data lists, '(...) or whatever syntax
 
   if (tree is SExp) {
     final binding = evaluate(ctx, tree.function);
-    final args = tree.arguments.map((subTree) => evaluate(ctx, subTree)).toList();
+    final args =
+        tree.arguments.map((subTree) => evaluate(ctx, subTree)).toList();
 
     if (binding is FunctionBinding) {
       return binding.apply(args);
@@ -27,11 +32,7 @@ Node evaluate(Context ctx, dynamic tree) {
     if (binding is VariableBinding) {
       return binding.value;
     }
-
-    throw Exception('$binding is not a function');
   }
 
   throw Exception('what the what');
 }
-
-

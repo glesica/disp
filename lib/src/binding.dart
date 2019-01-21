@@ -2,6 +2,9 @@ import 'package:dumblisp/src/ast/node.dart';
 
 abstract class Binding extends Node {
   String get name;
+
+  @override
+  String toString() => 'Binding $name';
 }
 
 abstract class FunctionBinding extends Binding {
@@ -10,7 +13,7 @@ abstract class FunctionBinding extends Binding {
 
 typedef Node NativeFunctionCallback(List<Node> arguments);
 
-class NativeFunction implements FunctionBinding {
+class NativeFunction extends FunctionBinding {
   NativeFunction({this.name, this.callback});
 
   @override
@@ -22,7 +25,7 @@ class NativeFunction implements FunctionBinding {
   Node apply(List<Node> arguments) => callback(arguments);
 }
 
-class ProgramFunction implements FunctionBinding {
+class ProgramFunction extends FunctionBinding {
   ProgramFunction(this.name);
 
   @override
