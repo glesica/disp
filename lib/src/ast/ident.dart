@@ -10,5 +10,5 @@ class Ident extends Node {
   final String name;
 
   @override
-  String toString() => 'Ident $name';
+  String toString() => 'Ident "$name"';
 }

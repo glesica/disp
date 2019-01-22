@@ -1,4 +1,5 @@
 import 'package:dumblisp/src/ast/ident.dart';
+import 'package:dumblisp/src/ast/escaped_s_exp.dart';
 import 'package:dumblisp/src/ast/node.dart';
 import 'package:dumblisp/src/ast/s_exp.dart';
 import 'package:dumblisp/src/ast/scalar.dart';
@@ -18,7 +19,9 @@ Node evaluate(Context ctx, dynamic tree) {
     return binding;
   }
 
-  // TODO: Implement data lists, '(...) or whatever syntax
+  if (tree is EscapedSExp) {
+    return tree;
+  }
 
   if (tree is SExp) {
     final binding = evaluate(ctx, tree.function);

@@ -8,5 +8,11 @@ abstract class Num<T extends num> extends Node implements Scalar<T> {
   final T value;
 
   @override
+  int get hashCode => value.hashCode;
+
+  @override
+  bool operator ==(other) => other is Num<T> && value == other.value;
+
+  @override
   String toString() => 'Num $value';
 }

@@ -19,5 +19,5 @@ class SExp extends Node implements Lst {
   Node get function => children.first;
 
   @override
-  String toString() => 'SExp ${children}';
+  String toString() => 'SExp $children';
 }

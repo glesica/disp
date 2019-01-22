@@ -1,9 +1,36 @@
+import 'dart:io';
+
+import 'package:args/args.dart';
 import 'package:dumblisp/dumblisp.dart';
 
+const scriptOption = 'script';
+
 void main(List<String> args) {
-  final input = args[0];
-  final tree = parseString(input);
+  final argParser = ArgParser(usageLineLength: 80)
+    ..addOption(scriptOption,
+        abbr: 's', help: 'Pass script to execute as a string');
+  final argResults = argParser.parse(args);
 
-  print(evaluate(standardContext, tree.value));
+  final _isScript = argResults[scriptOption] != null;
+
+  if (_isScript) {
+    final input = argResults[scriptOption];
+    final tree = parseString(input);
+
+    print(evaluate(standardContext, tree.value));
+    return;
+  }
+
+  if (argResults.arguments.isNotEmpty) {
+    for (final scriptPath in argResults.arguments) {
+      final input = File(scriptPath).readAsStringSync();
+      final tree = parseString(input);
+
+      print(evaluate(standardContext, tree.value));
+      return;
+    }
+  }
+
+  print('No script or file provided');
+  exit(1);
 }
-

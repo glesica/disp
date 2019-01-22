@@ -9,5 +9,5 @@ class Str extends Node implements Scalar<String> {
 
   final String value;
 
-  String toString() => 'Str $value';
+  String toString() => 'Str "$value"';
 }
