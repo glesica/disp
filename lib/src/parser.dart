@@ -42,7 +42,7 @@ Parser<Node> _buildParser() {
   final sExp = undefined<SExp>();
   final escapedSExp = undefined<Lst>();
 
-  final list = (identifier | integer | float | string | sExp | escapedSExp)
+  final list = (identifier | float | integer | string | sExp | escapedSExp)
       .plus()
       .castList<Node>()
       .map<Lst>(Lst.from);
