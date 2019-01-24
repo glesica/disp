@@ -4,12 +4,13 @@ import 'package:dumblisp/src/ast/node.dart';
 import 'package:dumblisp/src/ast/num.dart';
 import 'package:dumblisp/src/ast/str.dart';
 import 'package:dumblisp/src/ast/void.dart';
-import 'package:dumblisp/src/binding.dart';
+import 'package:dumblisp/src/ast/binding.dart';
 import 'package:dumblisp/src/context.dart';
 
 final _standardBuilder = Context.builder()
   ..addAllBindings([
     NativeFunction(name: 'echo', callback: echo),
+    NativeFunction(name: 'id', callback: id),
     NativeFunction(name: 'sum', callback: sum),
     NativeFunction(name: 'diff', callback: diff),
     NativeFunction(name: 'prod', callback: prod),
@@ -31,6 +32,11 @@ Void echo(List<Node> args) {
   }
   print(output);
   return Void();
+}
+
+Node id(List<Node> args) {
+  final arg = args[0];
+  return arg;
 }
 
 Num sum(List<Node> expressions) {

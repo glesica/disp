@@ -7,11 +7,13 @@ import 'package:dumblisp/src/ast/node.dart';
 import 'package:dumblisp/src/ast/s_exp.dart';
 import 'package:dumblisp/src/ast/str.dart';
 import 'package:petitparser/petitparser.dart';
+import 'package:petitparser/debug.dart';
 
 final _parser = _buildParser();
 
-Result<Node> parseString(String source) {
-  return _parser.parse(source);
+Result<Node> parseString(String source, {bool useTracer}) {
+  final parser = useTracer == true ? trace(_parser) : _parser;
+  return parser.parse(source);
 }
 
 Parser<Node> _buildParser() {
@@ -32,7 +34,7 @@ Parser<Node> _buildParser() {
 
   // Syntactic elements
 
-  final identifier = idChars.plus().flatten().map<Ident>(Ident.from);
+  final identifier = idChars.plus().flatten().trim().map<Ident>(Ident.from);
   final float = (digits & char('.') & digits).flatten().map<Float>(Float.from);
   final integer = digits.flatten().map<Int>(Int.from);
   final string = (lQuote & strChars.star().flatten() & rQuote)

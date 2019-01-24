@@ -10,5 +10,11 @@ class Ident extends Node {
   final String name;
 
   @override
+  int get hashCode => name.hashCode;
+
+  @override
+  bool operator ==(other) => other is Ident && name == other.name;
+
+  @override
   String toString() => 'Ident "$name"';
 }

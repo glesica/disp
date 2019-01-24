@@ -1,5 +1,5 @@
 import 'package:dumblisp/src/ast/node.dart';
-import 'package:dumblisp/src/binding.dart';
+import 'package:dumblisp/src/ast/binding.dart';
 
 abstract class Context {
   static ContextBuilder builder() => ContextBuilderImpl();
