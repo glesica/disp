@@ -1,4 +1,4 @@
-import 'package:dumblisp/src/ast/ident.dart';
+import 'package:disp/src/ast/ident.dart';
 
 class Var extends Ident {
   Var(String name) : super(name);

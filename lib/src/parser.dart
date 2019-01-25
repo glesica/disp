@@ -1,11 +1,11 @@
-import 'package:dumblisp/src/ast/escaped.dart';
-import 'package:dumblisp/src/ast/float.dart';
-import 'package:dumblisp/src/ast/ident.dart';
-import 'package:dumblisp/src/ast/int.dart';
-import 'package:dumblisp/src/ast/lst.dart';
-import 'package:dumblisp/src/ast/node.dart';
-import 'package:dumblisp/src/ast/s_exp.dart';
-import 'package:dumblisp/src/ast/str.dart';
+import 'package:disp/src/ast/escaped.dart';
+import 'package:disp/src/ast/float.dart';
+import 'package:disp/src/ast/ident.dart';
+import 'package:disp/src/ast/int.dart';
+import 'package:disp/src/ast/lst.dart';
+import 'package:disp/src/ast/node.dart';
+import 'package:disp/src/ast/s_exp.dart';
+import 'package:disp/src/ast/str.dart';
 import 'package:petitparser/petitparser.dart';
 import 'package:petitparser/debug.dart';
 

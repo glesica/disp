@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
-import 'package:dumblisp/dumblisp.dart';
+import 'package:disp/disp.dart';
 
 const scriptOption = 'script';
 const traceFlag = 'trace';

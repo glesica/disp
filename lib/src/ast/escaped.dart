@@ -1,4 +1,4 @@
-import 'package:dumblisp/src/ast/node.dart';
+import 'package:disp/src/ast/node.dart';
 
 class Escaped<T extends Node> extends Node {
   Escaped(this.node);

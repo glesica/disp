@@ -1,5 +1,5 @@
-import 'package:dumblisp/src/ast/node.dart';
-import 'package:dumblisp/src/ast/scalar.dart';
+import 'package:disp/src/ast/node.dart';
+import 'package:disp/src/ast/scalar.dart';
 
 /// A [Node] to represent UTF-8 strings.
 class Str extends Node implements Scalar<String> {

@@ -1,4 +1,4 @@
-import 'package:dumblisp/src/ast/node.dart';
+import 'package:disp/src/ast/node.dart';
 
 /// A [Node] that represents no value at all, used as the return type
 /// for functions that exist to provide side effects.

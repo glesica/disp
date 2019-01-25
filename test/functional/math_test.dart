@@ -1,4 +1,4 @@
-import 'package:dumblisp/dumblisp.dart';
+import 'package:disp/disp.dart';
 import 'package:test/test.dart';
 
 void main() {

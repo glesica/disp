@@ -1,4 +1,4 @@
-import 'package:dumblisp/src/ast/node.dart';
+import 'package:disp/src/ast/node.dart';
 
 /// A [Node] that can represent a list of other [Nodes] but cannot
 /// itself be instantiated.

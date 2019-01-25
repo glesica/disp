@@ -1,7 +1,7 @@
 // TODO: Guard against an empty s-expression
 
-import 'package:dumblisp/src/ast/lst.dart';
-import 'package:dumblisp/src/ast/node.dart';
+import 'package:disp/src/ast/lst.dart';
+import 'package:disp/src/ast/node.dart';
 
 /// A [Node] that represents an s-expression, which is really just
 /// a list of [Nodes] that is interpreted as code to be executed.

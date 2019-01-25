@@ -1,8 +1,8 @@
-name: dumblisp
-description: A starting point for Dart libraries or applications.
+name: disp
+description: An extremely basic Lisp interpreter written in Dart.
 version: 1.0.0
-homepage: https://www.example.com
-author: George Lesica <email@example.com>
+homepage: https://github.com/glesica/disp
+author: George Lesica <george@lesica.com>
 
 environment:
   sdk: '>=2.1.0 <3.0.0'

@@ -1,4 +1,4 @@
-import 'package:dumblisp/src/ast/scalar.dart';
+import 'package:disp/src/ast/scalar.dart';
 
 final Bool boolFalse = Bool(false);
 

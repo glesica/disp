@@ -1,14 +1,14 @@
-import 'package:dumblisp/src/ast/bool.dart';
-import 'package:dumblisp/src/ast/float.dart';
-import 'package:dumblisp/src/ast/int.dart';
-import 'package:dumblisp/src/ast/node.dart';
-import 'package:dumblisp/src/ast/num.dart';
-import 'package:dumblisp/src/ast/s_exp.dart';
-import 'package:dumblisp/src/ast/scalar.dart';
-import 'package:dumblisp/src/ast/str.dart';
-import 'package:dumblisp/src/ast/void.dart';
-import 'package:dumblisp/src/ast/binding.dart';
-import 'package:dumblisp/src/context.dart';
+import 'package:disp/src/ast/bool.dart';
+import 'package:disp/src/ast/float.dart';
+import 'package:disp/src/ast/int.dart';
+import 'package:disp/src/ast/node.dart';
+import 'package:disp/src/ast/num.dart';
+import 'package:disp/src/ast/s_exp.dart';
+import 'package:disp/src/ast/scalar.dart';
+import 'package:disp/src/ast/str.dart';
+import 'package:disp/src/ast/void.dart';
+import 'package:disp/src/ast/binding.dart';
+import 'package:disp/src/context.dart';
 
 final _standardBuilder = Context.builder()
   ..addAllBindings([

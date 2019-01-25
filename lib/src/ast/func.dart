@@ -1,4 +1,4 @@
-import 'package:dumblisp/src/ast/ident.dart';
+import 'package:disp/src/ast/ident.dart';
 
 class Func extends Ident {
   Func(String name) : super(name);

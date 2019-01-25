@@ -1,4 +1,4 @@
-import 'package:dumblisp/src/ast/num.dart';
+import 'package:disp/src/ast/num.dart';
 
 /// A [Num] node to represent integers (64-bit).
 class Int extends Num<int> {

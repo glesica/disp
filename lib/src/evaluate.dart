@@ -1,10 +1,10 @@
-import 'package:dumblisp/src/ast/escaped.dart';
-import 'package:dumblisp/src/ast/ident.dart';
-import 'package:dumblisp/src/ast/node.dart';
-import 'package:dumblisp/src/ast/s_exp.dart';
-import 'package:dumblisp/src/ast/scalar.dart';
-import 'package:dumblisp/src/ast/binding.dart';
-import 'package:dumblisp/src/context.dart';
+import 'package:disp/src/ast/escaped.dart';
+import 'package:disp/src/ast/ident.dart';
+import 'package:disp/src/ast/node.dart';
+import 'package:disp/src/ast/s_exp.dart';
+import 'package:disp/src/ast/scalar.dart';
+import 'package:disp/src/ast/binding.dart';
+import 'package:disp/src/context.dart';
 
 Node evaluate(Context ctx, dynamic tree) {
   if (tree is Escaped) {

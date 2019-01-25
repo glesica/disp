@@ -1,4 +1,4 @@
-import 'package:dumblisp/src/ast/node.dart';
+import 'package:disp/src/ast/node.dart';
 
 abstract class Binding extends Node {
   String get name;
