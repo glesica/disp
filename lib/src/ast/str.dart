@@ -9,5 +9,11 @@ class Str extends Node implements Scalar<String> {
 
   final String value;
 
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
+  bool operator ==(other) => other is Str && value == other.value;
+
   String toString() => 'Str "$value"';
 }

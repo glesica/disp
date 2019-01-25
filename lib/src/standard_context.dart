@@ -3,6 +3,7 @@ import 'package:dumblisp/src/ast/float.dart';
 import 'package:dumblisp/src/ast/int.dart';
 import 'package:dumblisp/src/ast/node.dart';
 import 'package:dumblisp/src/ast/num.dart';
+import 'package:dumblisp/src/ast/scalar.dart';
 import 'package:dumblisp/src/ast/str.dart';
 import 'package:dumblisp/src/ast/void.dart';
 import 'package:dumblisp/src/ast/binding.dart';
@@ -17,6 +18,9 @@ final _standardBuilder = Context.builder()
     NativeFunction(name: 'prod', callback: prod),
     NativeFunction(name: 'quot', callback: quot),
     NativeFunction(name: 'if', callback: ifElse),
+    NativeFunction(name: 'eq', callback: equalTo),
+    NativeFunction(name: 'gt', callback: greaterThan),
+    NativeFunction(name: 'lt', callback: lessThan),
     VariableBinding(name: 'false', value: Bool(false)),
     VariableBinding(name: 'true', value: Bool(true)),
   ]);
@@ -73,6 +77,24 @@ Node ifElse(List<Node> expressions) {
   final trueValue = expressions[1];
   final falseValue = expressions[2];
   return condition.value ? trueValue : falseValue;
+}
+
+Bool equalTo(List<Node> expressions) {
+  final left = expressions[0] as Scalar;
+  final right = expressions[1] as Scalar;
+  return Bool(left == right);
+}
+
+Bool greaterThan(List<Node> expressions) {
+  final left = expressions[0] as Num;
+  final right = expressions[1] as Num;
+  return Bool(left.value > right.value);
+}
+
+Bool lessThan(List<Node> expressions) {
+  final left = expressions[0] as Num;
+  final right = expressions[1] as Num;
+  return Bool(left.value < right.value);
 }
 
 Num _chooseNum(num value) {

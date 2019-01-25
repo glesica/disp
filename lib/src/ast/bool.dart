@@ -1,10 +1,10 @@
-import 'package:dumblisp/src/ast/node.dart';
+import 'package:dumblisp/src/ast/scalar.dart';
 
 final Bool boolFalse = Bool(false);
 
 final Bool boolTrue = Bool(true);
 
-class Bool extends Node {
+class Bool extends Scalar<bool> {
   Bool(this.value);
 
   static Bool from(bool value) => Bool(value);
