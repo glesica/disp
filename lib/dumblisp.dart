@@ -3,7 +3,7 @@ export 'src/standard_context.dart' show standardContext;
 export 'src/parser.dart' show parseString;
 export 'src/evaluate.dart' show evaluate;
 
-export 'src/ast/escaped_s_exp.dart';
+export 'src/ast/escaped.dart';
 export 'src/ast/float.dart';
 export 'src/ast/func.dart';
 export 'src/ast/ident.dart';

@@ -1,5 +1,5 @@
+import 'package:dumblisp/src/ast/escaped.dart';
 import 'package:dumblisp/src/ast/ident.dart';
-import 'package:dumblisp/src/ast/escaped_s_exp.dart';
 import 'package:dumblisp/src/ast/node.dart';
 import 'package:dumblisp/src/ast/s_exp.dart';
 import 'package:dumblisp/src/ast/scalar.dart';
@@ -7,11 +7,11 @@ import 'package:dumblisp/src/ast/binding.dart';
 import 'package:dumblisp/src/context.dart';
 
 Node evaluate(Context ctx, dynamic tree) {
-  if (tree is Scalar) {
-    return tree;
+  if (tree is Escaped) {
+    return tree.unescape();
   }
 
-  if (tree is EscapedSExp) {
+  if (tree is Scalar) {
     return tree;
   }
 
@@ -20,6 +20,11 @@ Node evaluate(Context ctx, dynamic tree) {
     if (binding == null) {
       throw Exception('Identifier not found: $tree');
     }
+
+    if (binding is VariableBinding) {
+      return binding.value;
+    }
+
     return binding;
   }
 
@@ -32,9 +37,7 @@ Node evaluate(Context ctx, dynamic tree) {
       return binding.apply(args);
     }
 
-    if (binding is VariableBinding) {
-      return binding.value;
-    }
+    throw Exception('$binding not a valid function');
   }
 
   throw Exception('what the what');

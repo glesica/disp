@@ -1,3 +1,4 @@
+import 'package:dumblisp/src/ast/bool.dart';
 import 'package:dumblisp/src/ast/float.dart';
 import 'package:dumblisp/src/ast/int.dart';
 import 'package:dumblisp/src/ast/node.dart';
@@ -15,6 +16,9 @@ final _standardBuilder = Context.builder()
     NativeFunction(name: 'diff', callback: diff),
     NativeFunction(name: 'prod', callback: prod),
     NativeFunction(name: 'quot', callback: quot),
+    NativeFunction(name: 'if', callback: ifElse),
+    VariableBinding(name: 'false', value: Bool(false)),
+    VariableBinding(name: 'true', value: Bool(true)),
   ]);
 
 final standardContext = _standardBuilder.build();
@@ -62,6 +66,13 @@ Float quot(List<Node> expressions) {
   final left = expressions[0] as Int;
   final right = expressions[1] as Int;
   return Float(left.value / right.value);
+}
+
+Node ifElse(List<Node> expressions) {
+  final condition = expressions[0] as Bool;
+  final trueValue = expressions[1];
+  final falseValue = expressions[2];
+  return condition.value ? trueValue : falseValue;
 }
 
 Num _chooseNum(num value) {

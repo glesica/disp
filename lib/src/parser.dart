@@ -1,7 +1,7 @@
+import 'package:dumblisp/src/ast/escaped.dart';
 import 'package:dumblisp/src/ast/float.dart';
 import 'package:dumblisp/src/ast/ident.dart';
 import 'package:dumblisp/src/ast/int.dart';
-import 'package:dumblisp/src/ast/escaped_s_exp.dart';
 import 'package:dumblisp/src/ast/lst.dart';
 import 'package:dumblisp/src/ast/node.dart';
 import 'package:dumblisp/src/ast/s_exp.dart';
@@ -42,18 +42,14 @@ Parser<Node> _buildParser() {
       .map(Str.from);
 
   final sExp = undefined<SExp>();
-  final escapedSExp = undefined<Lst>();
 
-  final list = (identifier | float | integer | string | sExp | escapedSExp)
+  final expr = (identifier | float | integer | string | sExp).cast<Node>();
+  final escExpr = (escapeMarker & expr).pick<Node>(1).map<Escaped>(Escaped.from);
+
+  final list = (expr | escExpr)
       .plus()
       .castList<Node>()
       .map<Lst>(Lst.from);
-
-  final escapedSExpInner = (escapeMarker & lParen & list & rParen)
-      .pick(2)
-      .cast<Lst>()
-      .map<EscapedSExp>(EscapedSExp.from);
-  escapedSExp.set(escapedSExpInner);
 
   final sExpInner =
       (lParen & list & rParen).pick(1).cast<Lst>().map<SExp>(SExp.from);

@@ -13,6 +13,7 @@ void main() {
         '(sum 3 (sum 1 2))': Int(6),
         '(diff 1 0)': Int(1),
         '(diff 1 1)': Int(0),
+        '((id sum) 1 2)': Int(3),
       }.forEach((source, expected) {
         test('"$source"', () {
           final tree = parseString(source).value;
