@@ -3,6 +3,7 @@ import 'package:dumblisp/src/ast/float.dart';
 import 'package:dumblisp/src/ast/int.dart';
 import 'package:dumblisp/src/ast/node.dart';
 import 'package:dumblisp/src/ast/num.dart';
+import 'package:dumblisp/src/ast/s_exp.dart';
 import 'package:dumblisp/src/ast/scalar.dart';
 import 'package:dumblisp/src/ast/str.dart';
 import 'package:dumblisp/src/ast/void.dart';
@@ -21,6 +22,7 @@ final _standardBuilder = Context.builder()
     NativeFunction(name: 'eq', callback: equalTo),
     NativeFunction(name: 'gt', callback: greaterThan),
     NativeFunction(name: 'lt', callback: lessThan),
+    NativeFunction(name: 'nth', callback: nth),
     VariableBinding(name: 'false', value: Bool(false)),
     VariableBinding(name: 'true', value: Bool(true)),
   ]);
@@ -95,6 +97,12 @@ Bool lessThan(List<Node> expressions) {
   final left = expressions[0] as Num;
   final right = expressions[1] as Num;
   return Bool(left.value < right.value);
+}
+
+Node nth(List<Node> expressions) {
+  final index = expressions[0] as Int;
+  final array = expressions[1] as SExp;
+  return array.children.toList()[index.value];
 }
 
 Num _chooseNum(num value) {
