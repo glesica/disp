@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Disp Playground</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+<div id="wrapper">
+    <div id="header">
+        <h1>Disp Playground</h1>
+    </div>
+    <div id="menu">
+        <button id="button-run">Run</button>
+        <button id="button-reset">Reset</button>
+    </div>
+    <div id="editor">(sum 4 5)</div>
+    <div id="output"></div>
+</div>
+
+<textarea id="source"></textarea>
+
+<script src="../js/ace.js"></script>
+<script src="../js/mode-lisp.js"></script>
+<script>
+    const editor = ace.edit("editor");
+    editor.session.setMode("ace/mode/lisp");
+
+    const textSource = document.getElementById("source");
+    editor.session.on('change', function(delta) {
+        textSource.textContent = editor.getValue();
+    });
+    textSource.textContent = editor.getValue();
+
+    const buttonReset = document.getElementById("button-reset");
+    buttonReset.onclick = function() {
+        editor.setValue("");
+    }
+</script>
+<script src="index.dart.js"></script>
+</body>
+</html>

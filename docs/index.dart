@@ -3,8 +3,8 @@ import 'dart:html';
 import 'package:disp/disp.dart';
 
 void main() {
-  final textSource = querySelector('#text-source') as TextAreaElement;
-  final textOutput = querySelector('#text-output') as DivElement;
+  final textSource = querySelector('#source') as TextAreaElement;
+  final textOutput = querySelector('#output') as DivElement;
 
   (querySelector('#button-run') as ButtonElement)
       ..onClick.listen((event) async {
