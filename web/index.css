@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#wrapper {
+    display: grid;
+    grid-template-columns: 150px 0.5fr 0.5fr;
+    grid-template-rows: min-content 1.0fr;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#header {
+    background: aliceblue;
+    font-family: sans-serif;
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
+#header h1 {
+    margin: 0;
+    padding: 0;
+}
+
+#menu button {
+    display: block;
+    width: 100%;
+}
+
+#editor {
+    font-size: 16px;
+}
+
+#output {
+    background: darkslategrey;
+    color: aliceblue;
+    font-family: monospace;
+    font-size: 16px;
+    overflow: scroll;
+    padding: 8px;
+}
+
+#source {
+    display: none;
+}
