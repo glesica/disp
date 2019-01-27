@@ -7,10 +7,10 @@ void main() {
   final textOutput = querySelector('#output') as DivElement;
 
   (querySelector('#button-run') as ButtonElement)
-      ..onClick.listen((event) async {
-        final source = textSource.text;
-        final tree = parseString(source);
-        final output = evaluate(standardContext, tree.value);
-        textOutput.text = output.toString();
-      });
+    ..onClick.listen((event) async {
+      final source = textSource.text;
+      final tree = parseString(source);
+      final output = evaluate(standardContext, tree.value);
+      textOutput.text = output.toString();
+    });
 }

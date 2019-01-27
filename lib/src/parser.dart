@@ -44,15 +44,15 @@ Parser<Node> _buildParser() {
   final sExp = undefined<SExp>();
 
   final expr = (identifier | float | integer | string | sExp).cast<Node>();
-  final escExpr = (escapeMarker & expr).pick<Node>(1).map<Escaped>(Escaped.from);
+  final escExpr =
+      (escapeMarker & expr).pick<Node>(1).map<Escaped>(Escaped.from);
 
-  final list = (expr | escExpr)
-      .plus()
-      .castList<Node>()
-      .map<Lst>(Lst.from);
+  final list = (expr | escExpr).plus().castList<Node>().map<Lst>(Lst.from);
 
-  final sExpInner =
-      (lParen & list.optional(Lst.empty()) & rParen).pick(1).cast<Lst>().map<SExp>(SExp.from);
+  final sExpInner = (lParen & list.optional(Lst.empty()) & rParen)
+      .pick(1)
+      .cast<Lst>()
+      .map<SExp>(SExp.from);
   sExp.set(sExpInner);
 
   return sExp.end();
