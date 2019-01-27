@@ -6,7 +6,7 @@ import 'package:disp/disp.dart';
 const scriptOption = 'script';
 const traceFlag = 'trace';
 
-void main(List<String> args) {
+Future<void> main(List<String> args) async {
   final argParser = ArgParser(usageLineLength: 80)
     ..addOption(scriptOption,
         abbr: 's', help: 'Pass script to execute as a string')
@@ -29,10 +29,23 @@ void main(List<String> args) {
       final tree = parseString(input);
 
       print(evaluate(standardContext, tree.value));
-      return;
     }
+    return;
   }
 
-  print('No script or file provided');
-  exit(1);
+  // REPL
+  print('Disp - Dart Lisp');
+  print('A simple Lisp written, and embeddable, in Dart.');
+
+  final repl = Repl(
+    reader: () async {
+      return stdin.readLineSync();
+    },
+    writer: (output) async {
+      stdout.write(output);
+    },
+  );
+  await repl.listen();
+
+  exit(0);
 }
