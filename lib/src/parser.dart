@@ -52,7 +52,7 @@ Parser<Node> _buildParser() {
       .map<Lst>(Lst.from);
 
   final sExpInner =
-      (lParen & list & rParen).pick(1).cast<Lst>().map<SExp>(SExp.from);
+      (lParen & list.optional(Lst.empty()) & rParen).pick(1).cast<Lst>().map<SExp>(SExp.from);
   sExp.set(sExpInner);
 
   return sExp.end();

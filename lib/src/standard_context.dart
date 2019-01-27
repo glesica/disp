@@ -1,6 +1,8 @@
 import 'package:disp/src/ast/bool.dart';
 import 'package:disp/src/ast/float.dart';
+import 'package:disp/src/ast/ident.dart';
 import 'package:disp/src/ast/int.dart';
+import 'package:disp/src/ast/lambda.dart';
 import 'package:disp/src/ast/node.dart';
 import 'package:disp/src/ast/num.dart';
 import 'package:disp/src/ast/s_exp.dart';
@@ -23,6 +25,7 @@ final _standardBuilder = Context.builder()
     NativeFunction(name: 'gt', callback: greaterThan),
     NativeFunction(name: 'lt', callback: lessThan),
     NativeFunction(name: 'nth', callback: nth),
+    NativeFunction(name: 'lambda', callback: lambda),
     VariableBinding(name: 'false', value: Bool(false)),
     VariableBinding(name: 'true', value: Bool(true)),
   ]);
@@ -103,6 +106,14 @@ Node nth(List<Node> expressions) {
   final index = expressions[0] as Int;
   final array = expressions[1] as SExp;
   return array.children.toList()[index.value];
+}
+
+Node lambda(List<Node> expressions) {
+  // TODO: Don't just skip invalid parameter names
+  final parameters =
+      (expressions[0] as SExp).children.whereType<Ident>().toList();
+  final expression = expressions[1];
+  return Lambda(parameters, expression);
 }
 
 Num _chooseNum(num value) {

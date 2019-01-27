@@ -4,5 +4,11 @@ import 'package:disp/src/ast/node.dart';
 /// for functions that exist to provide side effects.
 class Void extends Node {
   @override
+  int get hashCode => 0;
+
+  @override
+  bool operator ==(other) => other is Void;
+
+  @override
   String toString() => 'Void';
 }

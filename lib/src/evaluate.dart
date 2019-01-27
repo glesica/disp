@@ -29,12 +29,12 @@ Node evaluate(Context ctx, dynamic tree) {
   }
 
   if (tree is SExp) {
-    final binding = evaluate(ctx, tree.function);
+    final binding = evaluate(ctx, tree.head);
 
     if (binding is FunctionBinding) {
-      final args =
-          tree.arguments.map((subTree) => evaluate(ctx, subTree)).toList();
-      return binding.apply(args);
+      final arguments =
+          tree.tail.map((subTree) => evaluate(ctx, subTree)).toList();
+      return binding.apply(arguments);
     }
 
     throw Exception('$binding not a valid function');

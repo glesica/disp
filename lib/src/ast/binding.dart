@@ -4,6 +4,12 @@ abstract class Binding extends Node {
   String get name;
 
   @override
+  int get hashCode => name.hashCode;
+
+  @override
+  bool operator ==(other) => other is Binding && name == other.name;
+
+  @override
   String toString() => 'Binding $name';
 }
 

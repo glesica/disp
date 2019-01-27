@@ -8,6 +8,12 @@ class Escaped<T extends Node> extends Node {
   final T node;
 
   @override
+  int get hashCode => node.hashCode;
+
+  @override
+  bool operator ==(other) => other is Escaped && node == other.node;
+
+  @override
   String toString() => 'Escaped $node';
 
   T unescape() => node;

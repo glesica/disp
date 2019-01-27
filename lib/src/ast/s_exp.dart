@@ -8,15 +8,25 @@ import 'package:disp/src/ast/node.dart';
 class SExp extends Node implements Lst {
   SExp(this.list);
 
+  static SExp empty() => SExp(Lst.empty());
+
   static SExp from(Lst list) => SExp(list);
+
+  static SExp wrap(Iterable<Node> iterable) => SExp(Lst(iterable));
 
   final Lst list;
 
-  Iterable<Node> get arguments => children.skip(1);
-
   Iterable<Node> get children => list.children;
 
-  Node get function => children.first;
+  @override
+  int get hashCode => list.hashCode;
+
+  Node get head => children.first;
+
+  Iterable<Node> get tail => children.skip(1);
+
+  @override
+  bool operator ==(other) => other is SExp && list == other.list;
 
   @override
   String toString() => 'SExp $children';
