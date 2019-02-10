@@ -1,7 +1,6 @@
 import 'package:disp/src/ast/node.dart';
 
-/// A [Node] that can represent a list of other [Nodes] but cannot
-/// itself be instantiated.
+/// A [Node] that can represent a list of other [Nodes].
 class Lst extends Node {
   Lst(this.children);
 
