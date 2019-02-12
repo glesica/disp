@@ -17,6 +17,7 @@ Node evaluate(Context ctx, dynamic tree) {
 
   if (tree is Ident) {
     final binding = ctx.binding(tree.name);
+
     if (binding == null) {
       throw Exception('Identifier not found: $tree');
     }
@@ -32,9 +33,8 @@ Node evaluate(Context ctx, dynamic tree) {
     final binding = evaluate(ctx, tree.head);
 
     if (binding is FunctionBinding) {
-      final arguments =
-          tree.tail.map((subTree) => evaluate(ctx, subTree)).toList();
-      return binding.apply(arguments);
+      final args = tree.tail.map((subTree) => evaluate(ctx, subTree)).toList();
+      return binding.apply(args);
     }
 
     throw Exception('$binding not a valid function');
