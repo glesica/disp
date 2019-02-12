@@ -2,7 +2,7 @@ import 'package:disp/disp.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('conditionals', () {
+  group('branch', () {
     group('if', () {
       <String, Node>{
         '(if true 1 0)': Int(1),

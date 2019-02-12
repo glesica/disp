@@ -52,17 +52,17 @@ Node id(List<Node> args) {
   return arg;
 }
 
-Node nth(List<Node> expressions) {
-  final index = expressions[0] as Int;
-  final array = expressions[1] as SExp;
+Node nth(List<Node> args) {
+  final index = args[0] as Int;
+  final array = args[1] as SExp;
   return array.children.toList()[index.value];
 }
 
-Node lambda(List<Node> expressions) {
+Node lambda(List<Node> args) {
   // TODO: Don't just skip invalid parameter names
   final parameters =
-      (expressions[0] as SExp).children.whereType<Ident>().toList();
-  final expression = expressions[1];
+      (args[0] as SExp).children.whereType<Ident>().toList();
+  final expression = args[1];
   return Lambda(parameters, expression);
 }
 
