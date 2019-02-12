@@ -2,6 +2,7 @@ export 'src/context.dart' show Context, ContextBuilder;
 export 'src/standard_context.dart' show standardContext;
 export 'src/parser.dart' show parseString;
 export 'src/evaluate.dart' show evaluate;
+export 'src/execute.dart' show executeString;
 export 'src/repl/repl.dart' show Reader, Repl, Writer;
 
 export 'src/ast/bool.dart';

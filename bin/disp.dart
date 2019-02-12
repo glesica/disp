@@ -8,27 +8,29 @@ const traceFlag = 'trace';
 
 Future<void> main(List<String> args) async {
   final argParser = ArgParser(usageLineLength: 80)
-    ..addOption(scriptOption,
-        abbr: 's', help: 'Pass script to execute as a string')
-    ..addFlag(traceFlag, help: 'Use tracing parser for debugging');
+    ..addOption(
+      scriptOption,
+      abbr: scriptOption[0],
+      help: 'Pass script to execute as a string',
+    )
+    ..addFlag(
+      traceFlag,
+      help: 'Use tracing parser for debugging',
+    );
   final argResults = argParser.parse(args);
 
   final _isScript = argResults[scriptOption] != null;
 
   if (_isScript) {
     final input = argResults[scriptOption];
-    final tree = parseString(input, useTracer: argResults[traceFlag]);
-
-    print(evaluate(standardContext, tree.value));
+    print(executeString(input, args: argResults.rest));
     return;
   }
 
   if (argResults.arguments.isNotEmpty) {
     for (final scriptPath in argResults.arguments) {
       final input = File(scriptPath).readAsStringSync();
-      final tree = parseString(input);
-
-      print(evaluate(standardContext, tree.value));
+      print(executeString(input, args: argResults.rest));
     }
     return;
   }
